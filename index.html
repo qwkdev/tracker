@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+	<style>
+		/* :root {
+			--pad: 15vw;
+			--header-height: 30vh;
+		} */
+
+		body {
+			margin: 0;
+			background: #080808;
+			overflow-x: hidden;
+		}
+		body::-webkit-scrollbar {
+			display: none;
+		}
+		p { margin: 0; }
+		
+		.glass {
+			background: rgba(245, 245, 255, 0.112);
+			backdrop-filter: blur(20px);
+			border: 0.1vw solid rgba(255, 255, 255, 0.164);
+		}
+		.svg-color {
+			fill: #fff;
+		}
+
+		#header {
+			z-index: 100;
+			pointer-events: none;
+			width: 100vw;
+			height: var(--header-height);
+			position: sticky;
+			top: 0;
+			left: 0;
+			
+			svg {
+				width: 100vw;
+				height: calc(var(--header-height) * (2 / 3));
+				transform: rotate(180deg);
+				position: absolute;
+			}
+			#name {
+				padding: 0 5vw;
+				height: calc(var(--header-height) * (2 / 3));
+				color: #fff;
+				line-height: calc(var(--header-height) * (2 / 3));
+				font-size: 5vw;
+				border-radius: 1.5vw;
+				text-align: center;
+				font-family: "syne";
+				font-weight: 800;
+
+				position: absolute;
+				top: calc(var(--header-height) / 6);
+				left: 5vw;
+			}
+			#name::selection {
+				background: #ccc;
+			}
+		}
+
+		#main {
+			height: max-content;
+			margin-bottom: 2vw;
+
+			p, ul {
+				margin: 0 5vw;
+			}
+			p, li {
+				font-size: 1.2vw;
+				line-height: 1.5vw;
+				color: #fff;
+				font-family: Arial;
+				font-weight: 400;
+
+				&::selection {
+					background: #ffffff55;
+				}
+			}
+		}
+
+		.link {
+			margin: 0 5vw;
+
+			--px: calc(var(--glow-x) * 1px);
+			--py: calc(var(--glow-y) * 1px);
+
+			overflow: hidden;
+
+			width: 25vw;
+			height: 4.85vw;
+			border-radius: 1.2vw;
+			font-size: 1.1vw;
+			padding: 0;
+			color: #ffffff;
+			transition: .4s;
+			box-sizing: border-box;
+
+			font-family: "Syne";
+			font-weight: 700;
+
+			p {
+				width: 100%;
+			}
+			svg {
+				width: 60%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			&:before {
+				content: "";
+				pointer-events: none;
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				inset: 0px;
+				border-radius: inherit;
+				background: radial-gradient(50vw circle at var(--px) var(--py), rgba(255, 255, 255, 0.1), transparent 30%);
+
+				z-index: 2;
+			}
+		}
+		.link:hover {
+			transform: scale(1.04);
+		}
+
+		@media (min-width: 600px) { :root { --header-height: 10vh; } }
+		@media (min-width: 768px) { :root { --header-height: 12vh; } }
+		@media (min-width: 992px) { :root { --header-height: 15vh; } }
+		@media (min-width: 1200px) { :root { --header-height: 18vh; } }
+		@media (min-width: 1900px) { :root { --header-height: 22vh; } }
+		@media (max-width: 600px), (aspect-ratio < 2/3) { :root { --header-height: 10vh; } }
+		@media (min-width: 100vh) { :root { --header-height: 12vw; } }
+		@media only screen and (max-width: 150vh) {
+			#main {
+				margin-top: 1vh;
+				margin-bottom: 2vh;
+				p, ul {
+					margin: 0 10vh;
+				}
+				p, li {
+					font-size: 2.5vh;
+					line-height: 2.7vh;
+				}
+			}
+			.link {
+				margin: 0 10vh;
+				width: calc(70vw - 20vh);
+				height: 10vh;
+				border-radius: 2.4vh;
+				font-size: 2.4vh;
+
+				&:before {
+					background: radial-gradient(100vw circle at var(--px) var(--py), rgba(255, 255, 255, 0.1), transparent 30%);
+				}
+			}
+		}
+		@media only screen and (max-width: 80vh) {
+			.link {
+				width: calc(100vw - 20vh);
+			}
+		}
+
+		.underlined {
+			color: #fff;
+			font-family: Arial;
+			font-weight: 500;
+			position: relative;
+			transition: .2s;
+			z-index: 2;
+			text-decoration: none;
+		}
+		.underline {
+			--widen: 0%;
+			--fix: 0%;
+			width: calc(100% + var(--widen));
+			transform: translateX(calc(-100% + var(--fix)));
+			height: 1px;
+			background: #fff;
+			position: absolute;
+			bottom: 0;
+			transition: .2s;
+			z-index: -1;
+		}
+		.underlined:hover {
+			color: #000;
+		}
+		.underlined:hover .underline {
+			height: 100%;
+		}
+		.underlined::selection {
+			background: #ffffff55;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<svg preserveAspectRatio="none" viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(0, 40, 255, 1)" offset="0%"></stop><stop stop-color="rgba(0, 222, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,245L48,253.2C96,261,192,278,288,236.8C384,196,480,98,576,57.2C672,16,768,33,864,73.5C960,114,1056,180,1152,204.2C1248,229,1344,212,1440,245C1536,278,1632,359,1728,359.3C1824,359,1920,278,2016,220.5C2112,163,2208,131,2304,114.3C2400,98,2496,98,2592,106.2C2688,114,2784,131,2880,130.7C2976,131,3072,114,3168,163.3C3264,212,3360,327,3456,343C3552,359,3648,278,3744,212.3C3840,147,3936,98,4032,65.3C4128,33,4224,16,4320,49C4416,82,4512,163,4608,171.5C4704,180,4800,114,4896,114.3C4992,114,5088,180,5184,220.5C5280,261,5376,278,5472,253.2C5568,229,5664,163,5760,187.8C5856,212,5952,327,6048,351.2C6144,376,6240,310,6336,261.3C6432,212,6528,180,6624,204.2C6720,229,6816,310,6864,351.2L6912,392L6912,490L6864,490C6816,490,6720,490,6624,490C6528,490,6432,490,6336,490C6240,490,6144,490,6048,490C5952,490,5856,490,5760,490C5664,490,5568,490,5472,490C5376,490,5280,490,5184,490C5088,490,4992,490,4896,490C4800,490,4704,490,4608,490C4512,490,4416,490,4320,490C4224,490,4128,490,4032,490C3936,490,3840,490,3744,490C3648,490,3552,490,3456,490C3360,490,3264,490,3168,490C3072,490,2976,490,2880,490C2784,490,2688,490,2592,490C2496,490,2400,490,2304,490C2208,490,2112,490,2016,490C1920,490,1824,490,1728,490C1632,490,1536,490,1440,490C1344,490,1248,490,1152,490C1056,490,960,490,864,490C768,490,672,490,576,490C480,490,384,490,288,490C192,490,96,490,48,490L0,490Z"></path><defs><linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(36, 34, 253, 1)" offset="0%"></stop><stop stop-color="rgba(170, 8, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 50px); opacity:0.9" fill="url(#sw-gradient-1)" d="M0,49L48,114.3C96,180,192,310,288,343C384,376,480,310,576,245C672,180,768,114,864,73.5C960,33,1056,16,1152,49C1248,82,1344,163,1440,196C1536,229,1632,212,1728,196C1824,180,1920,163,2016,163.3C2112,163,2208,180,2304,163.3C2400,147,2496,98,2592,65.3C2688,33,2784,16,2880,40.8C2976,65,3072,131,3168,163.3C3264,196,3360,196,3456,204.2C3552,212,3648,229,3744,261.3C3840,294,3936,343,4032,302.2C4128,261,4224,131,4320,81.7C4416,33,4512,65,4608,73.5C4704,82,4800,65,4896,65.3C4992,65,5088,82,5184,138.8C5280,196,5376,294,5472,277.7C5568,261,5664,131,5760,138.8C5856,147,5952,294,6048,351.2C6144,408,6240,376,6336,343C6432,310,6528,278,6624,277.7C6720,278,6816,310,6864,326.7L6912,343L6912,490L6864,490C6816,490,6720,490,6624,490C6528,490,6432,490,6336,490C6240,490,6144,490,6048,490C5952,490,5856,490,5760,490C5664,490,5568,490,5472,490C5376,490,5280,490,5184,490C5088,490,4992,490,4896,490C4800,490,4704,490,4608,490C4512,490,4416,490,4320,490C4224,490,4128,490,4032,490C3936,490,3840,490,3744,490C3648,490,3552,490,3456,490C3360,490,3264,490,3168,490C3072,490,2976,490,2880,490C2784,490,2688,490,2592,490C2496,490,2400,490,2304,490C2208,490,2112,490,2016,490C1920,490,1824,490,1728,490C1632,490,1536,490,1440,490C1344,490,1248,490,1152,490C1056,490,960,490,864,490C768,490,672,490,576,490C480,490,384,490,288,490C192,490,96,490,48,490L0,490Z"></path></svg>
+		<div id="name" class="glass">qwk.zone</div>
+	</div>
+	<div id="main">
+		<p>
+			Last updated: 28/04/25<br>
+			We respect your privacy. Our sites collect <u>minimal</u> information, necessary to operate securely and efficiently. Specifically:
+		</p>
+		<ul>
+			<li>We automatically collect your IP address as part of standard server logs, used <u>solely</u> for security (such as preventing attacks) and traffic measurement.</li>
+			<li>We do <u>not</u> use third-party cookies, tracking pixels, or sell any personal information.</li>
+			<li>We do <u>not</u> share your data with anyone except as required by law.</li>
+			<li>Server logs are stored <u>securely</u> and periodically deleted.</li>
+		</ul>
+		<p>
+			By using our sites, you consent to this limited data collection.<br>
+			This Privacy Policy applies to all websites affiliated websites using our tracking script.<br>
+			If you have any questions, please contact me at <span><a class="underlined" href="mailto:contact@qwk.zone" target="_blank" aria-label="Review">contact@qwk.zone<span class="underline" style="--widen: 3%; --fix: 2%;"></span></a></span>,<br>
+			or by using the box below.
+		</p>
+	</div>
+	<a href="https://qwk.pythonanywhere.com/contact?ref=Privacy" target="_blank" rel="noopener"><button class="glass link">
+		<p>Contact Me</p>
+	</button></a>
+
+	<script>
+		const cards = document.querySelectorAll(".link");
+
+		document.addEventListener("pointermove", (event) => {
+			cards.forEach((ele) => {
+				const rect = ele.getBoundingClientRect();
+				ele.style.setProperty("--glow-x", event.clientX - rect.left);
+				ele.style.setProperty("--glow-y", event.clientY - rect.top);
+			});
+		});
+	</script>
+</body>
+</html>
